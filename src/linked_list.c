@@ -1,38 +1,5 @@
 #include "linked_list.h"
 
-int main(void){
-
-    List digits = {0};
-    Node *d;
-    int delete = 5;
-
-    for (unsigned char i = 0; i < 10; i++) {
-        Node *n = add_node(&digits, i); 
-        if (n->content == delete) {
-            d = n;
-        }
-    } 
-    delete_node(&digits, d);
-
-    Node *last_node = digits.head;
-    printf("%d\n", last_node->content);
-    do {
-        last_node = last_node->next;
-        printf("%d\n", last_node->content);
-    } while (last_node->next); 
-
-    last_node = digits.head;
-    do {
-        Node *buf = last_node->next;
-        free(last_node);
-        last_node = buf;
-    } while (last_node->next); 
-
-
-    return 0;
-}
-
-
 Node *add_node(List *src, int cnt) {
 
     Node *n = malloc(sizeof(Node));
@@ -76,4 +43,45 @@ int delete_node(List *src, Node *target) {
     }
 
     return deleted;
+}
+
+void print_list(List src) {
+
+    Node *last_node = src.head;
+    printf("%d\n", last_node->content);
+    do {
+        last_node = last_node->next;
+        printf("%d\n", last_node->content);
+    } while (last_node->next); 
+
+}
+
+void free_list(List *src) {
+
+    Node *last_node = src->head;
+    do {
+        Node *buf = last_node->next;
+        free(last_node);
+        last_node = buf;
+    } while (last_node->next); 
+
+}
+
+Node *search_node(List src, int cnt) {
+
+    if (src.head == NULL) {
+        return NULL;
+    }
+    
+    Node *n = NULL;
+    Node *last_node = src.head;
+    do {
+        if (last_node->content == cnt) {
+            n = last_node;
+            break;
+        }
+        last_node = last_node->next;
+    } while (last_node->next);  
+
+    return n;
 }
