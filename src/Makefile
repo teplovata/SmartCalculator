@@ -2,13 +2,13 @@ PROJECT = linked_list
 COMPILE = gcc -std=c11 -g
 FLAGS = -Wall -Werror -Wextra
 SOURCE = $(wildcard *list.c)
-TEST = $(wildcard test*.c)
+TEST = $(wildcard test.c)
 LIB = $(PROJECT).a
 
 all: $(LIB)
 
 $(LIB): 
-	@$(COMPILE) $(FLAGS) -c $(SOURCE)
+	@$(COMPILE) $(FLAGS) -c $(SOURCE) stack.c
 	@ar -rcs $(LIB) *.o
 	@rm -f *.o
 
@@ -28,3 +28,4 @@ rex:
 	@make clean
 	@make build
 	@make ex
+
